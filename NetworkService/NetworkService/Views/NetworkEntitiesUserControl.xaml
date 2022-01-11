@@ -1,0 +1,31 @@
+﻿<UserControl x:Class="NetworkService.Views.NetworkEntitiesUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:NetworkService.Views"
+             xmlns:viewModel="clr-namespace:NetworkService.ViewModel"
+             xmlns:data="clr-namespace:NetworkService.Model"
+             mc:Ignorable="d" 
+             d:DesignHeight="960" d:DesignWidth="640">
+    <UserControl.DataContext>
+        <viewModel:NetworkEntitiesViewModel/>
+    </UserControl.DataContext>
+
+    <UserControl.Resources>
+        <DataTemplate DataType="{x:Type data:Entity}">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="{Binding Path=EntityValue, Mode=OneWay}"/>
+                <TextBlock Text=" ID: "/>
+                <TextBlock Text="{Binding Path=Id, Mode=OneWay}"/>
+            </StackPanel>
+        </DataTemplate>
+    </UserControl.Resources>
+    
+    <Grid>
+        <StackPanel Orientation="Vertical">
+            <ListBox ItemsSource="{Binding NetworkEntities}"/>
+        </StackPanel>
+        <Button Width="100" Height="30" Content="Refresh" Command="{Binding Refresh}"/>
+    </Grid>
+</UserControl>
