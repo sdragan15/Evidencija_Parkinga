@@ -57,6 +57,7 @@
     </ApplicationDefinition>
     <Compile Include="BindableBase.cs" />
     <Compile Include="Model\Entity.cs" />
+    <Compile Include="Model\ParkingType.cs" />
     <Compile Include="MyICommand.cs" />
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
     <Compile Include="ViewModel\NetworkEntitiesViewModel.cs" />

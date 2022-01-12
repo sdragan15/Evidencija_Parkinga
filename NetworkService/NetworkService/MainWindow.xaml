@@ -8,7 +8,7 @@
         xmlns:views="clr-namespace:NetworkService.Views"
         xmlns:data="clr-namespace:NetworkService.Model"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="660" Width="460">
 
     <Window.DataContext>
         <viewModel:MainWindowViewModel/>

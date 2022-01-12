@@ -9,7 +9,35 @@ namespace NetworkService.Model
     public class Entity : BindableBase
     {
         private int id;
-        private int entityValue;
+        private double entityValue;
+        private string name;
+        private ParkingType type;
+
+        public ParkingType Type
+        {
+            get { return type; }
+            set
+            {
+                if(value != null)
+                {
+                    type = value;
+                    OnPropertyChanged("Type");
+                }
+            }
+        }
+
+        public string Name
+        {
+            get { return name; }
+            set
+            {
+                if(name != value)
+                {
+                    name = value;
+                    OnPropertyChanged("Name");
+                }
+            }
+        }
 
         public int Id
         {
@@ -24,7 +52,7 @@ namespace NetworkService.Model
             }
         }
 
-        public int EntityValue
+        public double EntityValue
         {
             get { return entityValue; }
             set

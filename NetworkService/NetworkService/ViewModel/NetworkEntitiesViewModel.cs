@@ -14,8 +14,13 @@ namespace NetworkService.ViewModel
 
         public MyICommand Refresh { get; set; }
 
+        public ObservableCollection<ParkingType> parkingTypes { get; private set; } = new ObservableCollection<ParkingType>();
+
+
         public NetworkEntitiesViewModel()
         {
+            parkingTypes.Add(new ParkingType() { ImageSource = "", Parking = "Otvoren" });
+            parkingTypes.Add(new ParkingType() { ImageSource = "", Parking = "Zatvoren" });
             Refresh = new MyICommand(OnRefresh);
         }
 

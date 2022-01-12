@@ -7,25 +7,33 @@
              xmlns:viewModel="clr-namespace:NetworkService.ViewModel"
              xmlns:data="clr-namespace:NetworkService.Model"
              mc:Ignorable="d" 
-             d:DesignHeight="960" d:DesignWidth="640">
+             d:DesignHeight="660" d:DesignWidth="460"
+             >
     <UserControl.DataContext>
         <viewModel:NetworkEntitiesViewModel/>
     </UserControl.DataContext>
 
-    <UserControl.Resources>
-        <DataTemplate DataType="{x:Type data:Entity}">
-            <StackPanel Orientation="Horizontal">
-                <TextBlock Text="{Binding Path=EntityValue, Mode=OneWay}"/>
-                <TextBlock Text=" ID: "/>
-                <TextBlock Text="{Binding Path=Id, Mode=OneWay}"/>
-            </StackPanel>
-        </DataTemplate>
-    </UserControl.Resources>
-    
     <Grid>
         <StackPanel Orientation="Vertical">
-            <ListBox ItemsSource="{Binding NetworkEntities}"/>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="5">
+                <Label>Type:</Label>
+                <ComboBox ItemsSource="{Binding parkingTypes}" Width="100" Height="25"/>
+                <StackPanel Orientation="Horizontal" Margin="0, 0" VerticalAlignment="Center">
+                    <RadioButton Content="&lt;" Margin="10,0,10,0"/>
+                    <RadioButton Content="&gt;"/>
+                </StackPanel>
+                <TextBox Width="100" Height="25" Margin="10,0,0,0" VerticalContentAlignment="Center"/>
+                <Button Width="50" Margin="20,0,10,0" Content="Filter" Height="25"/>
+            </StackPanel>
+            <DataGrid x:Name="parkingDG" ItemsSource="{Binding NetworkEntities}" IsReadOnly="True" AutoGenerateColumns="False" Height="500">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Width="30" Header="ID" Binding="{Binding Id}"/>
+                    <DataGridTextColumn Width="*" Header="Name" Binding="{Binding Name}"/>
+                    <DataGridTextColumn Width="*" Header="Type" Binding="{Binding Type}"/>
+                    <DataGridTextColumn Width="*" Header="Value" Binding="{Binding EntityValue}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+            <Button Width="100" Height="30" Content="Refresh" Command="{Binding Refresh}"/>
         </StackPanel>
-        <Button Width="100" Height="30" Content="Refresh" Command="{Binding Refresh}"/>
     </Grid>
 </UserControl>
