@@ -8,7 +8,8 @@
         xmlns:views="clr-namespace:NetworkService.Views"
         xmlns:data="clr-namespace:NetworkService.Model"
         mc:Ignorable="d"
-        Title="MainWindow" Height="660" Width="460">
+        Title="MainWindow" Height="700" Width="460"
+        FontSize="17">
 
     <Window.DataContext>
         <viewModel:MainWindowViewModel/>
@@ -20,7 +21,7 @@
         </DataTemplate>
     </Window.Resources>
     
-    <Grid>
+    <Grid Margin="0">
         <ContentControl Content="{Binding CurrentViewModel}"/>
     </Grid>
 </Window>
