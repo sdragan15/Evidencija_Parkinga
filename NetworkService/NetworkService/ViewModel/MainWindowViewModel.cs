@@ -102,8 +102,11 @@ namespace NetworkService.ViewModel
         public void LoadEntities()
         {
             ObservableCollection<Entity> entities = new ObservableCollection<Entity>();
-            entities.Add(new Entity { Id = 1, EntityValue = 15 });
-            entities.Add(new Entity { Id = 5, EntityValue = 33 });
+            ParkingType parkig = new ParkingType();
+            parkig.Parking = "Otvoren";
+            parkig.ImageSource = "fas";
+            entities.Add(new Entity { Id = 1, EntityValue = 15, Name="Desi bre", Type = parkig});
+            entities.Add(new Entity { Id = 5, EntityValue = 33 , Name="Hello", Type = parkig});
             Entities = entities;
             NetworkEntitiesViewModel.NetworkEntities.Add(new Entity { Id = 1, EntityValue = 15 });
         }

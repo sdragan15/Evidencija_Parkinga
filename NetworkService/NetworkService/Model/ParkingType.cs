@@ -22,7 +22,7 @@ namespace NetworkService.Model
             {
                 if(parking != value)
                 {
-                    if(value == "Otvoren" || value == "Zatvoren")
+                    if(value.Equals("Otvoren")  || value.Equals("Zatvoren"))
                     {
                         parking = value;
                         OnPropertyChanged("Parking");
@@ -47,7 +47,7 @@ namespace NetworkService.Model
 
         public override string ToString()
         {
-            return parking;
+            return Parking;
         }
     }
 }

@@ -26,22 +26,22 @@
                 <TextBox Width="100" Height="30" Margin="10,0,0,0" VerticalContentAlignment="Center"/>
                 <Button Width="50" Margin="20,0,10,0" Content="Filter" Height="25"/>
             </StackPanel>
-            <DataGrid x:Name="parkingDG" ItemsSource="{Binding NetworkEntities}" IsReadOnly="True" AutoGenerateColumns="False" Height="446">
+            <DataGrid x:Name="parkingDG" ItemsSource="{Binding NetworkEntities}" SelectedItem="{Binding selectedEntity}" IsReadOnly="True" AutoGenerateColumns="False" Height="446">
                 <DataGrid.Columns>
                     <DataGridTextColumn Width="30" Header="ID" Binding="{Binding Id}"/>
                     <DataGridTextColumn Width="*" Header="Name" Binding="{Binding Name}"/>
-                    <DataGridTextColumn Width="*" Header="Type" Binding="{Binding Type}"/>
+                    <DataGridTextColumn Width="*" Header="Type" Binding="{Binding Type.Parking}"/>
                     <DataGridTextColumn Width="*" Header="Value" Binding="{Binding EntityValue}"/>
                 </DataGrid.Columns>
 
             </DataGrid>
-            <StackPanel Orientation="Horizontal">
+            <StackPanel Orientation="Horizontal" Height="119">
                 <StackPanel Orientation="Vertical" Margin="10,0">
-                    <TextBox Width="150" Height="30" Margin="5"/>
-                    <TextBox Width="150" Height="30" Margin="5"/>
-                    <TextBox Width="150" Height="30" Margin="5"/>
+                    <TextBox Width="150" Height="30" Margin="5" Text="{Binding newEntity.Id, Mode=TwoWay}"/>
+                    <TextBox Width="150" Height="30" Margin="5" Text="{Binding newEntity.Name, Mode=TwoWay}"/>
+                    <ComboBox Width="150" ItemsSource="{Binding parkingTypes}" SelectedItem="{Binding newEntity.Type.Parking}" Height="35"/>
                 </StackPanel>
-                <Image Width="100" Height="100" Source="https://static.vecteezy.com/packs/media/components/global/search-explore-nav/img/vectors/term-bg-1-666de2d941529c25aa511dc18d727160.jpg"/>
+                <Image Width="100" Height="100" Source="{Binding newEntity.Type.ImageSource}"/>
             </StackPanel>
             
         </StackPanel>
@@ -50,8 +50,8 @@
         <Label Content="Name" Width="150" Height="32" HorizontalContentAlignment="Center" IsHitTestVisible="False"  Margin="19,530,291,98"/>
         <Label Content="Type" Width="150" Height="32"  HorizontalContentAlignment="Center" IsHitTestVisible="False"  Margin="19,565,291,52" VerticalContentAlignment="Center"/>
 
-        <Button Width="100" Height="30" Content="Add" Margin="337,516,23,114"/>
-        <Button Width="100" Height="30" Content="Delete" Margin="337,556,23,74"/>
+        <Button Width="100" Height="30" Content="Add" Command="{Binding Add}" Margin="337,516,23,114"/>
+        <Button Width="100" Height="30" Content="Delete" Command="{Binding Delete}" Margin="337,556,23,74"/>
         <Button Width="100" Height="30" Content="Refresh" Command="{Binding Refresh}" Margin="60,620,300,10"/>
     </Grid>
 </UserControl>
