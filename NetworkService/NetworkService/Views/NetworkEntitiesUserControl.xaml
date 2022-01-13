@@ -18,13 +18,13 @@
         <StackPanel Orientation="Vertical">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="5">
                 <Label>Type:</Label>
-                <ComboBox ItemsSource="{Binding parkingTypes}" Width="100" Height="25"/>
+                <ComboBox ItemsSource="{Binding parkingTypes}" SelectedItem="{Binding FilterEntities.Parking}" Width="100" Height="25"/>
                 <StackPanel Orientation="Horizontal" Margin="0, 0" VerticalAlignment="Center">
-                    <RadioButton Content="&lt;" Margin="10,0,10,0"/>
-                    <RadioButton Content="&gt;"/>
+                    <RadioButton IsChecked="{Binding FilterEntities.Ascending}" Content="&lt;" Margin="10,0,10,0"/>
+                    <RadioButton IsChecked="{Binding FilterEntities.Descending}" Content="&gt;"/>
                 </StackPanel>
-                <TextBox Width="100" Height="30" Margin="10,0,0,0" VerticalContentAlignment="Center"/>
-                <Button Width="50" Margin="20,0,10,0" Content="Filter" Height="25"/>
+                <TextBox Text="{Binding FilterEntities.FilterValue}" Width="100" Height="30" Margin="10,0,0,0" VerticalContentAlignment="Center"/>
+                <Button Command="{Binding Filter}" Width="50" Margin="20,0,10,0" Content="Filter" Height="25"/>
             </StackPanel>
             <DataGrid x:Name="parkingDG" ItemsSource="{Binding NetworkEntities}" SelectedItem="{Binding selectedEntity}" IsReadOnly="True" AutoGenerateColumns="False" Height="446">
                 <DataGrid.Columns>

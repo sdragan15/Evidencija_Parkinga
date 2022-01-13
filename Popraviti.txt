@@ -1,0 +1,1 @@
+- Kada se u filteru dodaju vrednosti, one budu izbrisane.

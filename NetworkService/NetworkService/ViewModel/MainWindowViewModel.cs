@@ -13,9 +13,6 @@ namespace NetworkService.ViewModel
 {
     public class MainWindowViewModel:BindableBase
     {
-        private int count = 15; // Inicijalna vrednost broja objekata u sistemu
-                                // ######### ZAMENITI stvarnim brojem elemenata
-                                //           zavisno od broja entiteta u listi
 
         public static ObservableCollection<Entity> Entities { get; set; } = new ObservableCollection<Entity>();
         private Entity entity;
@@ -36,7 +33,7 @@ namespace NetworkService.ViewModel
         public MainWindowViewModel()
         {
             CurrentViewModel = networkEntitiesViewModel;
-            LoadEntities();
+            //LoadEntities();
 
             AddEntity = new MyICommand(OnAddEntity);
 
@@ -72,7 +69,7 @@ namespace NetworkService.ViewModel
                              * duzinu liste koja sadrzi sve objekte pod monitoringom, odnosno
                              * njihov ukupan broj (NE BROJATI OD NULE, VEC POSLATI UKUPAN BROJ)
                              * */
-                            Byte[] data = System.Text.Encoding.ASCII.GetBytes(count.ToString());
+                            Byte[] data = System.Text.Encoding.ASCII.GetBytes(Entities.Count.ToString());
                             stream.Write(data, 0, data.Length);
                         }
                         else
@@ -108,7 +105,6 @@ namespace NetworkService.ViewModel
             entities.Add(new Entity { Id = 1, EntityValue = 15, Name="Desi bre", Type = parkig});
             entities.Add(new Entity { Id = 5, EntityValue = 33 , Name="Hello", Type = parkig});
             Entities = entities;
-            NetworkEntitiesViewModel.NetworkEntities.Add(new Entity { Id = 1, EntityValue = 15 });
         }
 
         private void OnAddEntity()
@@ -123,16 +119,7 @@ namespace NetworkService.ViewModel
 
         private void AddNewEntity(Entity entity)
         {
-            foreach(Entity ent in Entities)
-            {
-                if(ent.Id == entity.Id)
-                {
-                    ent.EntityValue = entity.EntityValue;
-                    return;
-                }
-            }
-            Entities.Add(entity);
-            Console.WriteLine("New entity added " + entity.Id);
+            Entities[entity.Id].EntityValue = entity.EntityValue;
         }
 
     }
