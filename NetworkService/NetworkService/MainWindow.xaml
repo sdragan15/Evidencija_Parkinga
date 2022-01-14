@@ -8,7 +8,7 @@
         xmlns:views="clr-namespace:NetworkService.Views"
         xmlns:data="clr-namespace:NetworkService.Model"
         mc:Ignorable="d"
-        Title="MainWindow" Height="700" Width="460"
+        Title="MainWindow" Height="720" Width="480"
         FontSize="17">
 
     <Window.DataContext>
@@ -19,9 +19,33 @@
         <DataTemplate DataType="{x:Type viewModel:NetworkEntitiesViewModel}">
             <views:NetworkEntitiesUserControl/>
         </DataTemplate>
+
+        <DataTemplate DataType="{x:Type viewModel:NetworkDisplayViewModel}">
+            <views:NetworkDisplay/>
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type viewModel:MenuViewModel}">
+            <views:MenuControl/>
+        </DataTemplate>
     </Window.Resources>
-    
+
     <Grid Margin="0">
-        <ContentControl Content="{Binding CurrentViewModel}"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <ContentControl Content="{Binding CurrentViewModel}"/>
+        </Grid>
+        <Grid Grid.Row="1">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <Label Content="MENU:" FontSize="15" VerticalAlignment="Center"/>
+                <ComboBox Width="60" Height="40" Margin="0,0,25,0"/>
+                <Button Width="60" Content="HOME" Height="40" Margin="25,0,25,0"/>
+                <Button Width="60" Content="UNDO" Height="40" Margin="25,0,25,0"/>
+            </StackPanel>
+            
+        </Grid>
+        
     </Grid>
 </Window>

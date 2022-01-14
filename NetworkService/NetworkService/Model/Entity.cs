@@ -8,7 +8,7 @@ namespace NetworkService.Model
 {
     public class Entity : BindableBase
     {
-        private int id;
+        private string id;
         private double entityValue;
         private string name;
         private ParkingType type;
@@ -39,7 +39,7 @@ namespace NetworkService.Model
             }
         }
 
-        public int Id
+        public string Id
         {
             get { return id; }
             set

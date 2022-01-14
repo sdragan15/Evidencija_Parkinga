@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace NetworkService.ViewModel
 {
-    public class NetworkEntitiesViewModel:BindableBase
+    public class NetworkEntitiesViewModel : BindableBase
     {
         public ObservableCollection<Entity> NetworkEntities { get; private set; } = new ObservableCollection<Entity>();
         public static ObservableCollection<Entity> BackUpEntities { get; private set; } = new ObservableCollection<Entity>();
@@ -34,7 +34,7 @@ namespace NetworkService.ViewModel
             Add = new MyICommand(OnAdd);
             Delete = new MyICommand(OnDelete);
             Filter = new MyICommand(OnFilter);
-           // newEntity.Type.ImageSource = "hello";
+            // newEntity.Type.ImageSource = "hello";
         }
 
         private void OnRefresh()
@@ -44,11 +44,22 @@ namespace NetworkService.ViewModel
             {
                 NetworkEntities.Add(entity1);
             }
-            
+
         }
 
         private void OnAdd()
         {
+            foreach(Entity entity in BackUpEntities)
+            {
+                if (entity.Id.Equals(newEntity.Id))
+                {
+                    entity.Name = newEntity.Name;
+                    entity.Type.Parking = newEntity.Type.Parking;
+                    entity.Type.ImageSource = newEntity.Type.ImageSource;
+                    entity.EntityValue = newEntity.EntityValue;
+                    return;
+                }
+            }
             Entity entity2 = CreateNewEntity(newEntity);
 
             NetworkEntities.Add(entity2);
@@ -66,10 +77,21 @@ namespace NetworkService.ViewModel
         {
             NetworkEntities.Clear();
 
-            ParkingFilter();
-
-
-
+            try
+            {
+                if(int.Parse(FilterEntities.FilterValue) != 0 && (FilterEntities.LessThan || FilterEntities.GreaterThan))
+                {
+                    LessOrGreaterFilter();
+                }
+                else
+                {
+                    ParkingFilter();
+                }
+            }
+            catch (Exception)
+            {
+                ParkingFilter();
+            }
         }
 
 
@@ -85,7 +107,7 @@ namespace NetworkService.ViewModel
                     }
                 }
             }
-            else if(FilterEntities.Parking.Equals("Zatvoren"))
+            else if (FilterEntities.Parking.Equals("Zatvoren"))
             {
                 foreach (Entity entity in BackUpEntities)
                 {
@@ -95,6 +117,74 @@ namespace NetworkService.ViewModel
                     }
                 }
             }
+        }
+
+        public void LessOrGreaterFilter()
+        {
+            int fvalue;
+            try
+            {
+                fvalue = int.Parse(FilterEntities.FilterValue);
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("Sta se desava");
+                fvalue = -1;
+            }
+
+            if (FilterEntities.Parking.Equals("Otvoren"))
+            {
+                foreach (Entity entity in BackUpEntities)
+                {
+                    if (entity.Type.Parking.Equals("Otvoren"))
+                    {
+                        if (FilterEntities.GreaterThan == true)
+                        {
+                            if (int.Parse(entity.Id) >= fvalue)
+                            {
+                                NetworkEntities.Add(entity);
+                            }
+                        }
+
+                        else if (FilterEntities.LessThan == true)
+                        {
+                            if (int.Parse(entity.Id) < fvalue)
+                            {
+                                NetworkEntities.Add(entity);
+                            }
+                        }
+
+                    }
+                }
+            }
+            else if (FilterEntities.Parking.Equals("Zatvoren"))
+            {
+                foreach (Entity entity in BackUpEntities)
+                {
+                    if (entity.Type.Parking.Equals("Zatvoren"))
+                    {
+                        if (entity.Type.Parking.Equals("Otvoren"))
+                        {
+                            if (FilterEntities.GreaterThan == true)
+                            {
+                                if (int.Parse(entity.Id) >= fvalue)
+                                {
+                                    NetworkEntities.Add(entity);
+                                }
+                            }
+
+                            else if (FilterEntities.LessThan == true)
+                            {
+                                if (int.Parse(entity.Id) < fvalue)
+                                {
+                                    NetworkEntities.Add(entity);
+                                }
+                            }
+
+                        }
+                    }
+                }
+            } 
         }
 
         public Entity CreateNewEntity(Entity entity)

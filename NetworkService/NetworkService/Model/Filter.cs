@@ -9,8 +9,8 @@ namespace NetworkService.Model
     public class Filter : BindableBase
     {
         string parking;
-        bool ascending;
-        bool descending;
+        bool greaterThan;
+        bool lessThan;
         string filterValue;
 
         public string Parking
@@ -26,28 +26,28 @@ namespace NetworkService.Model
             }
         }
 
-        public bool Ascending
+        public bool GreaterThan
         {
-            get { return ascending; }
+            get { return greaterThan; }
             set
             {
-                if(ascending != value)
+                if(greaterThan != value)
                 {
-                    ascending = value;
-                    OnPropertyChanged("Ascending");
+                    greaterThan = value;
+                    OnPropertyChanged("GreaterThan");
                 }
             }
         }
 
-        public bool Descending
+        public bool LessThan
         {
-            get { return descending; }
+            get { return lessThan; }
             set
             {
-                if (descending != value)
+                if (lessThan != value)
                 {
-                    descending = value;
-                    OnPropertyChanged("Descending");
+                    lessThan = value;
+                    OnPropertyChanged("LessThan");
                 }
             }
         }

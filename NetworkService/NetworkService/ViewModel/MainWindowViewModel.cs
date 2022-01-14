@@ -17,9 +17,12 @@ namespace NetworkService.ViewModel
         public static ObservableCollection<Entity> Entities { get; set; } = new ObservableCollection<Entity>();
         private Entity entity;
         public MyICommand AddEntity { get; set; }
+        public MyICommand ShowMenu { get; set; }
 
         private NetworkEntitiesViewModel networkEntitiesViewModel = new NetworkEntitiesViewModel();
-        private BindableBase currentViewModel;
+        private NetworkDisplayViewModel networkDisplayViewModel = new NetworkDisplayViewModel();
+        private MenuViewModel menuViewModel = new MenuViewModel();
+        public BindableBase currentViewModel;
 
         public BindableBase CurrentViewModel
         {
@@ -36,7 +39,7 @@ namespace NetworkService.ViewModel
             //LoadEntities();
 
             AddEntity = new MyICommand(OnAddEntity);
-
+            ShowMenu = new MyICommand(OnShowMenu);
 
             createListener(); //Povezivanje sa serverskom aplikacijom
         }
@@ -83,7 +86,7 @@ namespace NetworkService.ViewModel
 
 
                             string[] str = incomming.Split('_', ':');
-                            entity = new Entity() { Id = int.Parse(str[1]), EntityValue = int.Parse(str[2]) };
+                            entity = new Entity() { Id = str[1], EntityValue = int.Parse(str[2]) };
                             AddNewEntity(entity);
 
                         }
@@ -102,9 +105,6 @@ namespace NetworkService.ViewModel
             ParkingType parkig = new ParkingType();
             parkig.Parking = "Otvoren";
             parkig.ImageSource = "fas";
-            entities.Add(new Entity { Id = 1, EntityValue = 15, Name="Desi bre", Type = parkig});
-            entities.Add(new Entity { Id = 5, EntityValue = 33 , Name="Hello", Type = parkig});
-            Entities = entities;
         }
 
         private void OnAddEntity()
@@ -119,7 +119,12 @@ namespace NetworkService.ViewModel
 
         private void AddNewEntity(Entity entity)
         {
-            Entities[entity.Id].EntityValue = entity.EntityValue;
+            Entities[int.Parse(entity.Id)].EntityValue = entity.EntityValue;
+        }
+
+        private void OnShowMenu()
+        {
+            CurrentViewModel = menuViewModel;
         }
 
     }

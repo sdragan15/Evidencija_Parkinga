@@ -61,9 +61,17 @@
     <Compile Include="Model\ParkingType.cs" />
     <Compile Include="MyICommand.cs" />
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
+    <Compile Include="ViewModel\MenuViewModel.cs" />
+    <Compile Include="ViewModel\NetworkDisplayViewModel.cs" />
     <Compile Include="ViewModel\NetworkEntitiesViewModel.cs" />
     <Compile Include="Views\MainWindowControl.xaml.cs">
       <DependentUpon>MainWindowControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MenuControl.xaml.cs">
+      <DependentUpon>MenuControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\NetworkDisplayControl.xaml.cs">
+      <DependentUpon>NetworkDisplayControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\NetworkEntitiesUserControl.xaml.cs">
       <DependentUpon>NetworkEntitiesUserControl.xaml</DependentUpon>
@@ -81,6 +89,14 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Views\MainWindowControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\MenuControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\NetworkDisplayControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
