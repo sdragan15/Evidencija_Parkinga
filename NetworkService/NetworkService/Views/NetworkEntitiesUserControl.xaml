@@ -7,7 +7,7 @@
              xmlns:viewModel="clr-namespace:NetworkService.ViewModel"
              xmlns:data="clr-namespace:NetworkService.Model"
              mc:Ignorable="d" 
-             Height="620" Width="460"
+             d:DesignHeight="620" d:DesignWidth="460"
              FontSize="17"
              >
     <UserControl.DataContext>

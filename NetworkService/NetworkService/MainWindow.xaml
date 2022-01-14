@@ -8,7 +8,7 @@
         xmlns:views="clr-namespace:NetworkService.Views"
         xmlns:data="clr-namespace:NetworkService.Model"
         mc:Ignorable="d"
-        Title="MainWindow" Height="720" Width="480"
+        Title="MainWindow" Height="770" Width="480"
         FontSize="17">
 
     <Window.DataContext>
@@ -33,16 +33,22 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
-            <ContentControl Content="{Binding CurrentViewModel}"/>
+            <StackPanel Orientation="Horizontal" Margin="5" HorizontalAlignment="Center" >
+                <Button Content="Entities" Width="100" Height="40" Margin="10,5,20,5" Command="{Binding SetMenuEntities}"/>
+                <Button Content="Display" Width="100" Height="40" Margin="20,5,20,5" Command="{Binding SetMenuDisplay}"/>
+                <Button Content="Graph" Width="100" Height="40" Margin="20,5,10,5" Command="{Binding SetMenuGraph}"/>
+            </StackPanel>
         </Grid>
         <Grid Grid.Row="1">
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                <Label Content="MENU:" FontSize="15" VerticalAlignment="Center"/>
-                <ComboBox Width="60" Height="40" Margin="0,0,25,0"/>
-                <Button Width="60" Content="HOME" Height="40" Margin="25,0,25,0"/>
-                <Button Width="60" Content="UNDO" Height="40" Margin="25,0,25,0"/>
+            <ContentControl Content="{Binding CurrentViewModel}"/>
+        </Grid>
+        <Grid Grid.Row="2">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,10">
+                <Button Width="60" Content="HOME" Height="40" Margin="40,0,40,0" Command="{Binding SetMenuEntities}"/>
+                <Button Width="60" Content="UNDO" Height="40" Margin="40,0,40,0"/>
             </StackPanel>
             
         </Grid>

@@ -16,13 +16,18 @@ namespace NetworkService.ViewModel
 
         public static ObservableCollection<Entity> Entities { get; set; } = new ObservableCollection<Entity>();
         private Entity entity;
+        public ObservableCollection<string> menuItems { get; set; } = new ObservableCollection<string>();
         public MyICommand AddEntity { get; set; }
         public MyICommand ShowMenu { get; set; }
+        public MyICommand SetMenuEntities { get; set; }
+        public MyICommand SetMenuDisplay { get; set; }
+        public MyICommand SetMenuGraph { get; set; }
 
         private NetworkEntitiesViewModel networkEntitiesViewModel = new NetworkEntitiesViewModel();
         private NetworkDisplayViewModel networkDisplayViewModel = new NetworkDisplayViewModel();
         private MenuViewModel menuViewModel = new MenuViewModel();
-        public BindableBase currentViewModel;
+        private BindableBase currentViewModel;
+
 
         public BindableBase CurrentViewModel
         {
@@ -33,13 +38,35 @@ namespace NetworkService.ViewModel
             }
         }
 
+        public string SelectedMenu
+        {
+            get
+            {
+                return SelectedMenu;
+            }
+            set
+            {
+                if(value != SelectedMenu)
+                {
+                    SelectedMenu = value;
+                    OnPropertyChanged("SelectedMenu");
+                }
+            }
+        }
+
         public MainWindowViewModel()
         {
+            menuItems.Add("Entities");
+            menuItems.Add("Display");
+            menuItems.Add("Graph");
             CurrentViewModel = networkEntitiesViewModel;
             //LoadEntities();
 
             AddEntity = new MyICommand(OnAddEntity);
             ShowMenu = new MyICommand(OnShowMenu);
+            SetMenuEntities = new MyICommand(OnSetMenuEntities);
+            SetMenuDisplay = new MyICommand(OnSetMenuDisplay);
+            SetMenuGraph = new MyICommand(OnSetMenuGraph);
 
             createListener(); //Povezivanje sa serverskom aplikacijom
         }
@@ -125,6 +152,22 @@ namespace NetworkService.ViewModel
         private void OnShowMenu()
         {
             CurrentViewModel = menuViewModel;
+        }
+
+        private void OnSetMenuEntities()
+        {
+            
+            CurrentViewModel = networkEntitiesViewModel;
+        }
+
+        private void OnSetMenuDisplay()
+        {
+            CurrentViewModel = networkDisplayViewModel;
+        }
+
+        private void OnSetMenuGraph()
+        {
+            CurrentViewModel = networkEntitiesViewModel;
         }
 
     }

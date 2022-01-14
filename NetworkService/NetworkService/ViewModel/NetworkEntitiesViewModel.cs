@@ -34,6 +34,7 @@ namespace NetworkService.ViewModel
             Add = new MyICommand(OnAdd);
             Delete = new MyICommand(OnDelete);
             Filter = new MyICommand(OnFilter);
+            OnRefresh();
             // newEntity.Type.ImageSource = "hello";
         }
 
@@ -65,6 +66,7 @@ namespace NetworkService.ViewModel
             NetworkEntities.Add(entity2);
             BackUpEntities.Add(entity2);
             MainWindowViewModel.Entities.Add(entity2);
+            NetworkDisplayViewModel.DisplayEntities.Add(entity2);
         }
 
         private void OnDelete()
@@ -97,26 +99,37 @@ namespace NetworkService.ViewModel
 
         private void ParkingFilter()
         {
-            if (FilterEntities.Parking.Equals("Otvoren"))
+            try
             {
-                foreach (Entity entity in BackUpEntities)
+                if(FilterEntities.Parking != null)
                 {
-                    if (entity.Type.Parking.Equals("Otvoren"))
+                    if (FilterEntities.Parking.Equals("Otvoren"))
                     {
-                        NetworkEntities.Add(entity);
+                        foreach (Entity entity in BackUpEntities)
+                        {
+                            if (entity.Type.Parking.Equals("Otvoren"))
+                            {
+                                NetworkEntities.Add(entity);
+                            }
+                        }
+                    }
+                    else if (FilterEntities.Parking.Equals("Zatvoren"))
+                    {
+                        foreach (Entity entity in BackUpEntities)
+                        {
+                            if (entity.Type.Parking.Equals("Zatvoren"))
+                            {
+                                NetworkEntities.Add(entity);
+                            }
+                        }
                     }
                 }
-            }
-            else if (FilterEntities.Parking.Equals("Zatvoren"))
+                
+            }catch (Exception)
             {
-                foreach (Entity entity in BackUpEntities)
-                {
-                    if (entity.Type.Parking.Equals("Zatvoren"))
-                    {
-                        NetworkEntities.Add(entity);
-                    }
-                }
+
             }
+            
         }
 
         public void LessOrGreaterFilter()
