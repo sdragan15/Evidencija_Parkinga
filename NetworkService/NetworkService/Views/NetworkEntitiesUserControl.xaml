@@ -41,7 +41,7 @@
                     <TextBox Width="150" Height="30" Margin="5" Text="{Binding newEntity.Name, Mode=TwoWay}"/>
                     <ComboBox Width="150" Margin="5" ItemsSource="{Binding parkingTypes}" SelectedItem="{Binding newEntity.Type.Parking}" Height="35"/>
                 </StackPanel>
-                <Image Width="100" Height="100" Source="{Binding newEntity.Type.ImageSource}"/>
+                <Image Margin="20,0,0,0" Width="100" Height="100" Source="{Binding newEntity.Type.ImageSource}" Stretch="UniformToFill"/>
             </StackPanel>
             
         </StackPanel>

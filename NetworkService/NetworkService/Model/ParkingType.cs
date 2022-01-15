@@ -26,6 +26,17 @@ namespace NetworkService.Model
                     {
                         parking = value;
                         OnPropertyChanged("Parking");
+
+                        if (value.Equals("Otvoren"))
+                        {
+                            ImageSource = "Images/parkingEmpty.jpg";
+                            OnPropertyChanged("ImageSource");
+                        }
+                        else
+                        {
+                            ImageSource = "Images/parkingFull.jpg";
+                            OnPropertyChanged("ImageSource");
+                        }
                     }
                 }
             }
@@ -41,6 +52,7 @@ namespace NetworkService.Model
                 {
                     imageSource = value;
                     OnPropertyChanged("ImageSource");
+
                 }
             }
         }

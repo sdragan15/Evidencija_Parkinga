@@ -64,6 +64,7 @@
     <Compile Include="ViewModel\MenuViewModel.cs" />
     <Compile Include="ViewModel\NetworkDisplayViewModel.cs" />
     <Compile Include="ViewModel\NetworkEntitiesViewModel.cs" />
+    <Compile Include="ViewModel\NetworkGraphViewModel.cs" />
     <Compile Include="Views\MainWindowControl.xaml.cs">
       <DependentUpon>MainWindowControl.xaml</DependentUpon>
     </Compile>
@@ -75,6 +76,9 @@
     </Compile>
     <Compile Include="Views\NetworkEntitiesUserControl.xaml.cs">
       <DependentUpon>NetworkEntitiesUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\NetworkGraphControl.xaml.cs">
+      <DependentUpon>NetworkGraphControl.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -101,6 +105,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\NetworkEntitiesUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\NetworkGraphControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -131,6 +139,9 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Views\Images\parkingEmpty.jpg" />
+    <Resource Include="Views\Images\parkingFull.jpg" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

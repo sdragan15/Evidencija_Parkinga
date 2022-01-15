@@ -24,12 +24,16 @@ namespace NetworkService.ViewModel
         public Entity selectedEntity { get; set; } = new Entity();
         public Filter FilterEntities { get; set; } = new Filter();
 
+        private string ImageEmtpy = AppDomain.CurrentDomain.BaseDirectory + "Images/parkingEmpty.jpg";
+        private string ImageFull = AppDomain.CurrentDomain.BaseDirectory + "Images/parkingFull.jpg";
+
+
 
         public NetworkEntitiesViewModel()
         {
             newEntity.Type = new ParkingType();
-            parkingTypes.Add(new ParkingType() { ImageSource = "", Parking = "Otvoren" });
-            parkingTypes.Add(new ParkingType() { ImageSource = "", Parking = "Zatvoren" });
+            parkingTypes.Add(new ParkingType() { ImageSource = "Images/parkingEmpty.jpg", Parking = "Otvoren" });
+            parkingTypes.Add(new ParkingType() { ImageSource = "Images/parkingFull.jpg", Parking = "Zatvoren" });
             Refresh = new MyICommand(OnRefresh);
             Add = new MyICommand(OnAdd);
             Delete = new MyICommand(OnDelete);
