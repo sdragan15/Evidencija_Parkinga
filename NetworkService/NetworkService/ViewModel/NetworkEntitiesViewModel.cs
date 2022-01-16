@@ -204,7 +204,7 @@ namespace NetworkService.ViewModel
             } 
         }
 
-        public Entity CreateNewEntity(Entity entity)
+        public static Entity CreateNewEntity(Entity entity)
         {
             try
             {

@@ -10,11 +10,19 @@ namespace NetworkService.ViewModel
 {
     public class NetworkDisplayViewModel : BindableBase
     {
-        public static ObservableCollection<Entity> DisplayEntities { get; set; } = new ObservableCollection<Entity>();
+        public static ObservableCollection<Entity> DisplayEntities { get; private set; } = new ObservableCollection<Entity>();
+
+        private bool dragging { get; set; } = false;
+        
+
 
         public NetworkDisplayViewModel()
         {
-            
+            NetworkDisplayViewModel.DisplayEntities.Clear();
+            foreach (Entity entity in MainWindowViewModel.Entities)
+            {
+                NetworkDisplayViewModel.DisplayEntities.Add(entity);
+            }
         }
     }
 }
