@@ -62,10 +62,11 @@
                 </StackPanel>
             </StackPanel>
 
-            <ListView x:Name="listView" Margin="15,5,15,15" Height="260" Width="auto" ItemsSource="{Binding DisplayEntities}"
+            <ListView x:Name="listView" Margin="15,5,15,15" Height="220" Width="auto" ItemsSource="{Binding DisplayEntities}"
                       SelectionChanged="ListView_SelectionChanged" MouseLeftButtonUp="listView_MouseLeftButtonUp">
                 
             </ListView>
+            <Button Width="100" Height="30" Margin="0,0,0,10" Content="Refresh" Click="Refresh_Click"/>
         </StackPanel>
     </Grid>
 </UserControl>

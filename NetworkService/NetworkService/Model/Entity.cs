@@ -67,7 +67,7 @@ namespace NetworkService.Model
 
         public override string ToString()
         {
-            return "Id: " + Id + ", Name: " + Name + ", Value: " + EntityValue;
+            return $"Id: {Id},  Name: {Name},  Value: {EntityValue}";
         }
     }
 }

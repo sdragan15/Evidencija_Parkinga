@@ -24,9 +24,10 @@
             <views:NetworkDisplay/>
         </DataTemplate>
 
-        <DataTemplate DataType="{x:Type viewModel:MenuViewModel}">
-            <views:MenuControl/>
+        <DataTemplate DataType="{x:Type viewModel:NetworkGraphViewModel}">
+            <views:NetworkGraphControl/>
         </DataTemplate>
+
     </Window.Resources>
 
     <Grid Margin="0">

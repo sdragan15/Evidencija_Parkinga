@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
@@ -23,8 +24,11 @@ namespace NetworkService.ViewModel
         public MyICommand SetMenuDisplay { get; set; }
         public MyICommand SetMenuGraph { get; set; }
 
+        public static string Path = AppDomain.CurrentDomain.BaseDirectory + "entities.txt";
+
         private NetworkEntitiesViewModel networkEntitiesViewModel = new NetworkEntitiesViewModel();
         private NetworkDisplayViewModel networkDisplayViewModel = new NetworkDisplayViewModel();
+        private NetworkGraphViewModel networkGraphViewModel = new NetworkGraphViewModel();
         private MenuViewModel menuViewModel = new MenuViewModel();
         private BindableBase currentViewModel;
 
@@ -111,7 +115,7 @@ namespace NetworkService.ViewModel
                             // Obraditi poruku kako bi se dobile informacije o izmeni
                             // Azuriranje potrebnih stvari u aplikaciji
 
-
+                            SaveToFile(incomming); 
                             string[] str = incomming.Split('_', ':');
                             entity = new Entity() { Id = str[1], EntityValue = int.Parse(str[2]) };
                             AddNewEntity(entity);
@@ -125,6 +129,14 @@ namespace NetworkService.ViewModel
             listeningThread.Start();
         }
 
+
+        private void SaveToFile(string s)
+        {
+            using (StreamWriter writer = File.AppendText(Path))
+            {
+                writer.WriteLine(DateTime.Now + ":" + s);
+            }
+        }
 
         public void LoadEntities()
         {
@@ -146,7 +158,15 @@ namespace NetworkService.ViewModel
 
         private void AddNewEntity(Entity entity)
         {
-            Entities[int.Parse(entity.Id)].EntityValue = entity.EntityValue;
+            try
+            {
+                Entities[int.Parse(entity.Id)].EntityValue = entity.EntityValue;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            NetworkGraphViewModel.ReadFromFile(Path);
         }
 
         private void OnShowMenu()
@@ -167,7 +187,7 @@ namespace NetworkService.ViewModel
 
         private void OnSetMenuGraph()
         {
-            CurrentViewModel = networkEntitiesViewModel;
+            CurrentViewModel = networkGraphViewModel;
         }
 
     }

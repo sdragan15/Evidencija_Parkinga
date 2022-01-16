@@ -77,6 +77,10 @@ namespace NetworkService.Views
                 {
                     BitmapImage background = new BitmapImage();
                     background.BeginInit();
+                    if(SelectedEntity.EntityValue > 80)
+                    {
+                        Slika = "Images/error.png";
+                    }
                     background.UriSource = new Uri("pack://application:,,,/Views/" + Slika);
                     background.EndInit();
                     ((Canvas)sender).Background = new ImageBrush(background);
@@ -87,7 +91,7 @@ namespace NetworkService.Views
                     entities.Add(de);
 
                     DisplayEntity temp = new DisplayEntity();
-                    if(canvas != null)
+                    if(canvas != null && !((Canvas)sender).Name.Equals(canvas.Name))
                     {
                         foreach(DisplayEntity displayEntity in entities)
                         {
@@ -106,6 +110,11 @@ namespace NetworkService.Views
                     NetworkDisplayViewModel.DisplayEntities.Remove(SelectedEntity);
                 }
             }
+        }
+
+        private void RefreshList()
+        {
+            listView.Items.Refresh();
         }
 
         private void mouseDown(object sender, MouseButtonEventArgs e)
@@ -157,11 +166,13 @@ namespace NetworkService.Views
                     entities.Remove(entity1);
                 }
             }
+            RefreshList();
         }
 
 
         private void button12_Click(object sender, RoutedEventArgs e)
         {
+            RefreshList();
             bool done = false;
             DisplayEntity entity1 = new DisplayEntity();
             Canvas findCanvas = (Canvas)stackPanel.FindName("itemCanvas12");
@@ -194,6 +205,7 @@ namespace NetworkService.Views
 
         private void button11_Click(object sender, RoutedEventArgs e)
         {
+            RefreshList();
             bool done = false;
             DisplayEntity entity1 = new DisplayEntity();
             Canvas findCanvas = (Canvas)stackPanel.FindName("itemCanvas11");
@@ -225,6 +237,7 @@ namespace NetworkService.Views
 
         private void button10_Click(object sender, RoutedEventArgs e)
         {
+            RefreshList();
             bool done = false;
             DisplayEntity entity1 = new DisplayEntity();
             Canvas findCanvas = (Canvas)stackPanel.FindName("itemCanvas10");
@@ -256,6 +269,7 @@ namespace NetworkService.Views
 
         private void button9_Click(object sender, RoutedEventArgs e)
         {
+            RefreshList();
             bool done = false;
             DisplayEntity entity1 = new DisplayEntity();
             Canvas findCanvas = (Canvas)stackPanel.FindName("itemCanvas9");
@@ -287,6 +301,7 @@ namespace NetworkService.Views
 
         private void button8_Click(object sender, RoutedEventArgs e)
         {
+            RefreshList();
             bool done = false;
             DisplayEntity entity1 = new DisplayEntity();
             Canvas findCanvas = (Canvas)stackPanel.FindName("itemCanvas8");
@@ -318,6 +333,7 @@ namespace NetworkService.Views
 
         private void button7_Click(object sender, RoutedEventArgs e)
         {
+            RefreshList();
             bool done = false;
             DisplayEntity entity1 = new DisplayEntity();
             Canvas findCanvas = (Canvas)stackPanel.FindName("itemCanvas7");
@@ -349,6 +365,7 @@ namespace NetworkService.Views
 
         private void button6_Click(object sender, RoutedEventArgs e)
         {
+            RefreshList();
             bool done = false;
             DisplayEntity entity1 = new DisplayEntity();
             Canvas findCanvas = (Canvas)stackPanel.FindName("itemCanvas6");
@@ -380,6 +397,7 @@ namespace NetworkService.Views
 
         private void button5_Click(object sender, RoutedEventArgs e)
         {
+            RefreshList();
             bool done = false;
             DisplayEntity entity1 = new DisplayEntity();
             Canvas findCanvas = (Canvas)stackPanel.FindName("itemCanvas5");
@@ -411,6 +429,7 @@ namespace NetworkService.Views
 
         private void button4_Click(object sender, RoutedEventArgs e)
         {
+            RefreshList();
             bool done = false;
             DisplayEntity entity1 = new DisplayEntity();
             Canvas findCanvas = (Canvas)stackPanel.FindName("itemCanvas4");
@@ -442,6 +461,7 @@ namespace NetworkService.Views
 
         private void button3_Click(object sender, RoutedEventArgs e)
         {
+            RefreshList();
             bool done = false;
             DisplayEntity entity1 = new DisplayEntity();
             Canvas findCanvas = (Canvas)stackPanel.FindName("itemCanvas3");
@@ -473,6 +493,7 @@ namespace NetworkService.Views
 
         private void button2_Click(object sender, RoutedEventArgs e)
         {
+            RefreshList();
             bool done = false;
             DisplayEntity entity1 = new DisplayEntity();
             Canvas findCanvas = (Canvas)stackPanel.FindName("itemCanvas2");
@@ -731,6 +752,11 @@ namespace NetworkService.Views
                 }
 
             }
+        }
+
+        private void Refresh_Click(object sender, RoutedEventArgs e)
+        {
+            listView.Items.Refresh();
         }
     }
 }
