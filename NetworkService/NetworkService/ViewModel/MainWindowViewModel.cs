@@ -166,7 +166,6 @@ namespace NetworkService.ViewModel
             {
                 Console.WriteLine(ex.Message);
             }
-            NetworkGraphViewModel.ReadFromFile(Path);
         }
 
         private void OnShowMenu()

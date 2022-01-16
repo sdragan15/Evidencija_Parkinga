@@ -83,7 +83,7 @@ namespace MeteringSimulator
                     sendReport();
                     //Upis u text box, radi lakse provere
                     textBox.Text = "Entity_" + objectNum + " changed state to: " + value.ToString() + "\n" + textBox.Text;
-                    //Pocni proces ispocetka
+                    //Pocni proces ispocetka            
                     startReporting();
                 });
             });
