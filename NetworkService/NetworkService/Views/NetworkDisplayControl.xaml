@@ -6,6 +6,7 @@
              xmlns:local="clr-namespace:NetworkService.Views"
              xmlns:viewModel="clr-namespace:NetworkService.ViewModel"
              xmlns:data="clr-namespace:NetworkService.Model"
+             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
              mc:Ignorable="d" 
              Height="620" Width="460"
              FontSize="17">
@@ -18,10 +19,15 @@
         <StackPanel Orientation="Vertical" VerticalAlignment="Top" Background="Gray">
             <StackPanel Orientation="Vertical">
                 <StackPanel x:Name="stackPanel" Orientation="Horizontal" Margin="4,4,4,0" HorizontalAlignment="Center">
-                    <Canvas x:Name="itemCanvas1" Width="100" Height="100" Background="White" Margin="4" AllowDrop="True" DragOver="dragOver" Drop="drop"
+                    <Canvas x:Name="itemCanvas1" Width="100" Height="100" Background="White" Margin="4" AllowDrop="True" Drop="drop"
                             MouseDown="mouseDown">
+                        <i:Interaction.Triggers>
+                            
+                        </i:Interaction.Triggers>   
+                        
                         <Button x:Name="button1" Width="100" Height="20" Margin="0,80,0,0" Content="remove" FontSize="12" Click="button1_Click"/>
                     </Canvas>
+                    
                     <Canvas x:Name="itemCanvas2" MouseDown="itemCanvas2_MouseDown"  Width="100" Height="100" Background="White" Margin="4" AllowDrop="True" DragOver="dragOver" Drop="drop">
                         <Button x:Name="button2" Width="100" Height="20" Margin="0,80,0,0" Content="remove" FontSize="12" Click="button2_Click"/>
                     </Canvas>
@@ -63,8 +69,15 @@
             </StackPanel>
 
             <ListView x:Name="listView" Margin="15,5,15,15" Height="220" Width="auto" ItemsSource="{Binding DisplayEntities}"
-                      SelectionChanged="ListView_SelectionChanged" MouseLeftButtonUp="listView_MouseLeftButtonUp">
-                
+                        SelectedItem="{Binding SelectedItem}">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="MouseLeftButtonUp">
+                        <i:InvokeCommandAction Command="{Binding ListViewMouseLeftButtonUp}"/>
+                    </i:EventTrigger>
+                    <i:EventTrigger EventName="SelectionChanged">
+                        <i:InvokeCommandAction Command="{Binding ListViewSelectionChanged}" CommandParameter="{Binding ElementName=listView}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
             </ListView>
             <Button Width="100" Height="30" Margin="0,0,0,10" Content="Refresh" Click="Refresh_Click"/>
         </StackPanel>

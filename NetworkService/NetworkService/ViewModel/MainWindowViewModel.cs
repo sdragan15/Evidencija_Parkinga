@@ -160,7 +160,14 @@ namespace NetworkService.ViewModel
         {
             try
             {
-                Entities[int.Parse(entity.Id)].EntityValue = entity.EntityValue;
+                foreach(Entity e in Entities)
+                {
+                    if (e.Id.Equals(entity.Id))
+                    {
+                        Entities[int.Parse(entity.Id)].EntityValue = entity.EntityValue;
+                    }
+                }
+                
             }
             catch (Exception ex)
             {
