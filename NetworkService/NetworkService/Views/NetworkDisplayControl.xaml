@@ -19,10 +19,12 @@
         <StackPanel Orientation="Vertical" VerticalAlignment="Top" Background="Gray">
             <StackPanel Orientation="Vertical">
                 <StackPanel x:Name="stackPanel" Orientation="Horizontal" Margin="4,4,4,0" HorizontalAlignment="Center">
-                    <Canvas x:Name="itemCanvas1" Width="100" Height="100" Background="White" Margin="4" AllowDrop="True" Drop="drop"
+                    <Canvas x:Name="itemCanvas1" Width="100" Height="100" Background="White" Margin="4" AllowDrop="True"
                             MouseDown="mouseDown">
                         <i:Interaction.Triggers>
-                            
+                            <i:EventTrigger EventName="Drop">
+                                <i:InvokeCommandAction Command="{Binding drop}" CommandParameter="{Binding ElementName=itemCanvas1}"/>
+                            </i:EventTrigger>
                         </i:Interaction.Triggers>   
                         
                         <Button x:Name="button1" Width="100" Height="20" Margin="0,80,0,0" Content="remove" FontSize="12" Click="button1_Click"/>

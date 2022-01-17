@@ -24,8 +24,8 @@ namespace NetworkService.ViewModel
         public Entity selectedEntity { get; set; } = new Entity();
         public Filter FilterEntities { get; set; } = new Filter();
 
-        private string ImageEmtpy = AppDomain.CurrentDomain.BaseDirectory + "Images/parkingEmpty.jpg";
-        private string ImageFull = AppDomain.CurrentDomain.BaseDirectory + "Images/parkingFull.jpg";
+        public static string ImageEmtpy = AppDomain.CurrentDomain.BaseDirectory + "Images/parkingEmpty.jpg";
+        public static string ImageFull = AppDomain.CurrentDomain.BaseDirectory + "Images/parkingFull.jpg";
 
 
 

@@ -145,11 +145,11 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Views\Images\parkingEmpty.jpg" />
-    <Resource Include="Views\Images\parkingFull.jpg" />
+    <Resource Include="ViewModel\Images\parkingEmpty.jpg" />
+    <Resource Include="ViewModel\Images\parkingFull.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Views\Images\error.png" />
+    <Resource Include="ViewModel\Images\error.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

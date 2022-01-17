@@ -29,12 +29,12 @@ namespace NetworkService.Model
 
                         if (value.Equals("Otvoren"))
                         {
-                            ImageSource = "Images/parkingEmpty.jpg";
+                            ImageSource = "pack://application:,,,/ViewModel/Images/parkingEmpty.jpg";
                             OnPropertyChanged("ImageSource");
                         }
                         else
                         {
-                            ImageSource = "Images/parkingFull.jpg";
+                            ImageSource = "pack://application:,,,/ViewModel/Images/parkingFull.jpg";
                             OnPropertyChanged("ImageSource");
                         }
                     }
