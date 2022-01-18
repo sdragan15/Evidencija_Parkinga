@@ -58,6 +58,8 @@ namespace NetworkService.ViewModel
         private void OnbuttonEnter()
         {
             Console.WriteLine("enter");
+            NetworkEntitiesViewModel.WriteTextBox.Text = Input;
+            Input = "";
         }
     }
 }

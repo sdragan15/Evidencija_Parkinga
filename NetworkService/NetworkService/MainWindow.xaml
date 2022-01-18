@@ -48,16 +48,8 @@
             </StackPanel>
         </Grid>
         <Grid Grid.Row="1">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
-            </Grid.RowDefinitions>
-            <Grid Grid.Row="0">
-                <ContentControl Content="{Binding CurrentViewModel}"/>
-            </Grid>
-            <Grid Grid.Row="1">
-            </Grid>
-            
+            <ContentControl Content="{Binding CurrentViewModel}"/>
+
         </Grid>
         <Grid Grid.Row="2">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,10">

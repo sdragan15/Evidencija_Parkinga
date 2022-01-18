@@ -5,6 +5,8 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
 
 namespace NetworkService.ViewModel
 {
@@ -17,15 +19,33 @@ namespace NetworkService.ViewModel
         public MyICommand Add { get; set; }
         public MyICommand Delete { get; set; }
         public MyICommand Filter { get; set; }
+        public MyICommand<TextBox> gotFocusId { get; set; }
+        public MyICommand<TextBox> gotFocusFilter { get; set; }
+        public MyICommand<TextBox> gotFocusName { get; set; }
 
         public ObservableCollection<ParkingType> parkingTypes { get; private set; } = new ObservableCollection<ParkingType>();
 
         public Entity newEntity { get; set; } = new Entity();
         public Entity selectedEntity { get; set; } = new Entity();
         public Filter FilterEntities { get; set; } = new Filter();
+        public static TextBox WriteTextBox { get; set; } = new TextBox();
 
         public static string ImageEmtpy = AppDomain.CurrentDomain.BaseDirectory + "Images/parkingEmpty.jpg";
         public static string ImageFull = AppDomain.CurrentDomain.BaseDirectory + "Images/parkingFull.jpg";
+        private Visibility keyboardVisible;
+
+        public Visibility KeyboardVisible
+        {
+            get { return keyboardVisible; }
+            set
+            {
+                if(keyboardVisible != value)
+                {
+                    keyboardVisible = value;
+                    OnPropertyChanged("KeyboardVisible");
+                }
+            }
+        }
 
 
 
@@ -38,7 +58,16 @@ namespace NetworkService.ViewModel
             Add = new MyICommand(OnAdd);
             Delete = new MyICommand(OnDelete);
             Filter = new MyICommand(OnFilter);
+            gotFocusId = new MyICommand<TextBox>(OngotFocusId);
+            gotFocusName = new MyICommand<TextBox>(OngotFocusName);
+            gotFocusFilter = new MyICommand<TextBox>(OngotFocusFilter);
+            KeyboardVisible = Visibility.Collapsed;
             OnRefresh();
+
+            buttonPress = new MyICommand<string>(OnbuttonPress);
+            buttonDelete = new MyICommand(OnbuttonDelete);
+            buttonDeleteAll = new MyICommand(OnbuttonDeleteAll);
+            buttonEnter = new MyICommand(OnbuttonEnter);
             // newEntity.Type.ImageSource = "hello";
         }
 
@@ -50,6 +79,26 @@ namespace NetworkService.ViewModel
                 NetworkEntities.Add(entity1);
             }
 
+        }
+
+        private void OngotFocusId(TextBox textBox)
+        {
+            KeyboardVisible = Visibility.Visible;
+            WriteTextBox = textBox;
+            newEntity.Id = textBox.Text;
+        }
+
+        private void OngotFocusName(TextBox textBox)
+        {
+            KeyboardVisible = Visibility.Visible;
+            WriteTextBox = textBox;
+            newEntity.Name = textBox.Text;
+        }
+        private void OngotFocusFilter(TextBox textBox)
+        {
+            KeyboardVisible = Visibility.Visible;
+            WriteTextBox = textBox;
+            FilterEntities.FilterValue = textBox.Text;
         }
 
         private void OnAdd()
@@ -223,6 +272,55 @@ namespace NetworkService.ViewModel
                 return null;
             }
             
+        }
+
+        public static string InputText { get; set; }
+
+        private string input;
+        public string Input
+        {
+            get { return input; }
+            set
+            {
+                if (input != value)
+                {
+                    input = value;
+                    OnPropertyChanged("Input");
+                }
+            }
+        }
+        public MyICommand<string> buttonPress { get; set; }
+        public MyICommand buttonDelete { get; set; }
+        public MyICommand buttonDeleteAll { get; set; }
+        public MyICommand buttonEnter { get; set; }
+
+    
+
+        private void OnbuttonPress(string button)
+        {
+            Input += button;
+        }
+
+        private void OnbuttonDelete()
+        {
+            if (Input.Count() > 0)
+            {
+                Input = Input.Remove(Input.Length - 1);
+            }
+
+        }
+
+        private void OnbuttonDeleteAll()
+        {
+            Input = "";
+        }
+
+        private void OnbuttonEnter()
+        {
+            Console.WriteLine("enter");
+            NetworkEntitiesViewModel.WriteTextBox.Text = Input;
+            Input = "";
+            KeyboardVisible = Visibility.Collapsed;
         }
     }
 }
