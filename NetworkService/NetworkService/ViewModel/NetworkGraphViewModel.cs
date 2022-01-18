@@ -112,43 +112,50 @@ namespace NetworkService.ViewModel
             {
                 while (true)
                 {
-                    string str;
-                    string[] value;
-                    double num;
-                    string index;
-                    using (StreamReader reader = new StreamReader(s))
+                    try
                     {
-                        Entities.Clear();
-                        while (reader.Peek() >= 0)
+                        string str;
+                        string[] value;
+                        double num;
+                        string index;
+                        using (StreamReader reader = new StreamReader(s))
                         {
-                            str = reader.ReadLine();
-                            value = str.Split(':', '_');
-                            num = int.Parse(value[5]);
-                            num = 550 - num * 4;
-                            index = value[4];
-
-                            Entity entity = new Entity();
-                            entity.EntityValue = num;
-                            entity.Id = index;
-
-                            if (FilterValue == null)
+                            Entities.Clear();
+                            while (reader.Peek() >= 0)
                             {
-                                Entities.Insert(0, entity);
-                            }
-                            else
-                            {
-                                if (FilterValue.Equals(entity.Id))
+                                str = reader.ReadLine();
+                                value = str.Split(':', '_');
+                                num = int.Parse(value[5]);
+                                num = 550 - num * 4;
+                                index = value[4];
+
+                                Entity entity = new Entity();
+                                entity.EntityValue = num;
+                                entity.Id = index;
+
+                                if (FilterValue == null)
+                                {
                                     Entities.Insert(0, entity);
+                                }
+                                else
+                                {
+                                    if (FilterValue.Equals(entity.Id))
+                                        Entities.Insert(0, entity);
+                                }
+
                             }
 
                         }
 
+                        Value0 = (int)Entities[0].EntityValue;
+                        Value1 = (int)Entities[1].EntityValue;
+                        Value2 = (int)Entities[2].EntityValue;
+                        Value3 = (int)Entities[3].EntityValue;
+                    }catch (Exception ex)
+                    {
+                        Console.WriteLine(ex.Message);
                     }
                     
-                    Value0 = (int)Entities[0].EntityValue;
-                    Value1 = (int)Entities[1].EntityValue;
-                    Value2 = (int)Entities[2].EntityValue;
-                    Value3 = (int)Entities[3].EntityValue;
                     Thread.Sleep(1000);
                 }
             });

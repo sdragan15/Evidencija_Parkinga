@@ -60,6 +60,10 @@ namespace NetworkService.ViewModel
 
         public MainWindowViewModel()
         {
+            if (File.Exists(Path))
+            {
+                File.Delete(Path);
+            }
             menuItems.Add("Entities");
             menuItems.Add("Display");
             menuItems.Add("Graph");
