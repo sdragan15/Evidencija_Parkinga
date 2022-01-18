@@ -20,8 +20,8 @@
             <Button Width="80" Height="30" Margin="50,0,0,0" Content="Show" Command="{Binding ShowFilter}"/>
         </StackPanel>
         <Rectangle Margin="10" Fill="White"></Rectangle>
-        <Line X1="100" Y1="100" X2="100" Y2="550" Stroke="Black" StrokeThickness="5"/>
-        <Line X1="100" Y1="550" X2="420" Y2="550" Stroke="Black" StrokeThickness="5"/>
+        <Line X1="100" Y1="100" X2="100" Y2="555" Stroke="Black" StrokeThickness="5"/>
+        <Line X1="100" Y1="553" X2="420" Y2="553" Stroke="Black" StrokeThickness="5"/>
         <Line X1="100" Y1="450" X2="400" Y2="450" Stroke="Gray" StrokeThickness="1"/>
         <Line X1="100" Y1="350" X2="400" Y2="350" Stroke="Gray" StrokeThickness="1"/>
         <Line X1="100" Y1="250" X2="400" Y2="250" Stroke="Gray" StrokeThickness="1"/>
@@ -31,10 +31,10 @@
         <Label Content="50" Margin="30,334,350,256" Width="50" Height="30"/>
         <Label Content="25" Margin="45,436,365,154" Width="50" Height="30"/>
 
-        <Line X1="145" Y1="550" X2="145" Y2="{Binding Value0}" StrokeThickness="3" Stroke="Red"/>
-        <Line X1="210" Y1="550" X2="210" Y2="{Binding Value1}" StrokeThickness="3" Stroke="Red"/>
-        <Line X1="280" Y1="550" X2="280" Y2="{Binding Value2}" StrokeThickness="3" Stroke="Red"/>
-        <Line X1="350" Y1="550" X2="350" Y2="{Binding Value3}" StrokeThickness="3" Stroke="Red"/>
+        <Line X1="145" Y1="550" X2="145" Y2="{Binding Value0}" StrokeThickness="20" Stroke="Red"/>
+        <Line X1="210" Y1="550" X2="210" Y2="{Binding Value1}" StrokeThickness="20" Stroke="Red"/>
+        <Line X1="280" Y1="550" X2="280" Y2="{Binding Value2}" StrokeThickness="20" Stroke="Red"/>
+        <Line X1="350" Y1="550" X2="350" Y2="{Binding Value3}" StrokeThickness="20" Stroke="Red"/>
 
 
         <StackPanel Orientation="Horizontal" Margin="101,550,41,10">

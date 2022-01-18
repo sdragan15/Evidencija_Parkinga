@@ -29,7 +29,7 @@ namespace NetworkService.ViewModel
         private NetworkEntitiesViewModel networkEntitiesViewModel = new NetworkEntitiesViewModel();
         private NetworkDisplayViewModel networkDisplayViewModel = new NetworkDisplayViewModel();
         private NetworkGraphViewModel networkGraphViewModel = new NetworkGraphViewModel();
-        private MenuViewModel menuViewModel = new MenuViewModel();
+        public VirtualKeyboardViewModel virtualKeyboardViewModel = new VirtualKeyboardViewModel();
         private BindableBase currentViewModel;
 
 
@@ -67,11 +67,10 @@ namespace NetworkService.ViewModel
             menuItems.Add("Entities");
             menuItems.Add("Display");
             menuItems.Add("Graph");
-            CurrentViewModel = networkEntitiesViewModel;
+            CurrentViewModel = virtualKeyboardViewModel;
             //LoadEntities();
 
             AddEntity = new MyICommand(OnAddEntity);
-            ShowMenu = new MyICommand(OnShowMenu);
             SetMenuEntities = new MyICommand(OnSetMenuEntities);
             SetMenuDisplay = new MyICommand(OnSetMenuDisplay);
             SetMenuGraph = new MyICommand(OnSetMenuGraph);
@@ -179,10 +178,6 @@ namespace NetworkService.ViewModel
             }
         }
 
-        private void OnShowMenu()
-        {
-            CurrentViewModel = menuViewModel;
-        }
 
         private void OnSetMenuEntities()
         {

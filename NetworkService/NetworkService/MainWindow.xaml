@@ -28,6 +28,10 @@
             <views:NetworkGraphControl/>
         </DataTemplate>
 
+        <DataTemplate DataType="{x:Type viewModel:VirtualKeyboardViewModel}">
+            <views:VirtualKeyboardControl/>
+        </DataTemplate>
+
     </Window.Resources>
 
     <Grid Margin="0">
@@ -44,7 +48,16 @@
             </StackPanel>
         </Grid>
         <Grid Grid.Row="1">
-            <ContentControl Content="{Binding CurrentViewModel}"/>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <ContentControl Content="{Binding CurrentViewModel}"/>
+            </Grid>
+            <Grid Grid.Row="1">
+            </Grid>
+            
         </Grid>
         <Grid Grid.Row="2">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,10">
