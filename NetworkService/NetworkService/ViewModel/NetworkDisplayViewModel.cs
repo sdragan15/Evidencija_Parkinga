@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -35,7 +36,7 @@ namespace NetworkService.ViewModel
 
         public NetworkDisplayViewModel()
         {
-            NetworkDisplayViewModel.DisplayEntities.Clear();
+            DisplayEntities.Clear();
             foreach (Entity entity in MainWindowViewModel.Entities)
             {
                 NetworkDisplayViewModel.DisplayEntities.Add(entity);
@@ -71,7 +72,7 @@ namespace NetworkService.ViewModel
             dragging = false;
             if (SelectedEntity != null)
             {
-                if (canvas.Resources["taken"] == null)
+                if (canvas.Background == null || canvas.Background == Brushes.White)
                 {
                     BitmapImage background = new BitmapImage();
                     background.BeginInit();
@@ -81,9 +82,9 @@ namespace NetworkService.ViewModel
                     }
                     background.UriSource = new Uri(Slika);
                     background.EndInit();
-                   canvas.Background = new ImageBrush(background);
+                    canvas.Background = new ImageBrush(background);
                     DisplayEntity de = new DisplayEntity();
-                    de.Entity = NetworkEntitiesViewModel.CreateNewEntity(SelectedEntity);
+                    de.Entity = SelectedEntity;
                     de.Id = canvas.Name;
 
                     entities.Add(de);
@@ -105,7 +106,7 @@ namespace NetworkService.ViewModel
                             entities.Remove(temp);
                         }
                     }
-                    NetworkDisplayViewModel.DisplayEntities.Remove(SelectedEntity);
+                    DisplayEntities.Remove(SelectedEntity);
                 }
             }
         }

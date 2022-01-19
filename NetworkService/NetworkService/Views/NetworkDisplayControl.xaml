@@ -193,6 +193,19 @@
 
             <ListView x:Name="listView" Margin="15,5,15,15" Height="220" Width="auto" ItemsSource="{Binding DisplayEntities}"
                         SelectedItem="{Binding SelectedItem}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <WrapPanel>
+                            <TextBlock Text="Id: "/>
+                            <TextBlock Text="{Binding Id}"/>
+                            <TextBlock Text=",  Name: "/>
+                            <TextBlock Text="{Binding Name}"/>
+                            <TextBlock Text=",  Value: "/>
+                            <TextBlock Text="{Binding EntityValue}"/>
+                        </WrapPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+                
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="MouseLeftButtonUp">
                         <i:InvokeCommandAction Command="{Binding ListViewMouseLeftButtonUp}"/>

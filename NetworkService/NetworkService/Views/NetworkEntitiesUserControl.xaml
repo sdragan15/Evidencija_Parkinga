@@ -65,7 +65,7 @@
             
         </StackPanel>
         <StackPanel Orientation="Vertical" Background="LightCyan" Margin="0,0,0,10" VerticalAlignment="Bottom" Panel.ZIndex="2" Visibility="{Binding KeyboardVisible}">
-            <TextBox Height="30" Margin="5" Text="{Binding Input, Mode=TwoWay}"/>
+            <TextBox x:Name="tbInput" Height="30" Margin="5" Text="{Binding Input, Mode=TwoWay}"/>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                 <Button Width="40" Height="40" Content="1" Margin="3" Command="{Binding buttonPress}" CommandParameter="1"/>
                 <Button Width="40" Height="40" Content="2" Margin="3" Command="{Binding buttonPress}" CommandParameter="2"/>

@@ -89,6 +89,7 @@ namespace NetworkService.ViewModel
             Input = textBox.Text;
             valueChanged = "Id";
             
+            
         }
 
         private void OngotFocusName(TextBox textBox)
