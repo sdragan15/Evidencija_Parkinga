@@ -29,7 +29,6 @@ namespace NetworkService.ViewModel
         private NetworkEntitiesViewModel networkEntitiesViewModel = new NetworkEntitiesViewModel();
         private NetworkDisplayViewModel networkDisplayViewModel = new NetworkDisplayViewModel();
         private NetworkGraphViewModel networkGraphViewModel = new NetworkGraphViewModel();
-        private VirtualKeyboardViewModel virtualKeyboardViewModel = new VirtualKeyboardViewModel();
         private BindableBase currentViewModel;
 
 

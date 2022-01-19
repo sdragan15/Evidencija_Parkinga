@@ -28,10 +28,6 @@
             <views:NetworkGraphControl/>
         </DataTemplate>
 
-        <DataTemplate DataType="{x:Type viewModel:VirtualKeyboardViewModel}">
-            <views:VirtualKeyboardControl/>
-        </DataTemplate>
-
     </Window.Resources>
 
     <Grid Margin="0">

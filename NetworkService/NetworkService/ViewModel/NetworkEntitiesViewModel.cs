@@ -33,6 +33,7 @@ namespace NetworkService.ViewModel
         public static string ImageEmtpy = AppDomain.CurrentDomain.BaseDirectory + "Images/parkingEmpty.jpg";
         public static string ImageFull = AppDomain.CurrentDomain.BaseDirectory + "Images/parkingFull.jpg";
         private Visibility keyboardVisible;
+        private string valueChanged;
 
         public Visibility KeyboardVisible
         {
@@ -85,20 +86,24 @@ namespace NetworkService.ViewModel
         {
             KeyboardVisible = Visibility.Visible;
             WriteTextBox = textBox;
-            newEntity.Id = textBox.Text;
+            Input = textBox.Text;
+            valueChanged = "Id";
+            
         }
 
         private void OngotFocusName(TextBox textBox)
         {
             KeyboardVisible = Visibility.Visible;
             WriteTextBox = textBox;
-            newEntity.Name = textBox.Text;
+            Input = textBox.Text;
+            valueChanged = "Name";
         }
         private void OngotFocusFilter(TextBox textBox)
         {
             KeyboardVisible = Visibility.Visible;
             WriteTextBox = textBox;
-            FilterEntities.FilterValue = textBox.Text;
+            Input = textBox.Text;
+            valueChanged = "Filter";
         }
 
         private void OnAdd()
@@ -194,7 +199,6 @@ namespace NetworkService.ViewModel
             }
             catch (Exception)
             {
-                Console.WriteLine("Sta se desava");
                 fvalue = -1;
             }
 
@@ -317,8 +321,22 @@ namespace NetworkService.ViewModel
 
         private void OnbuttonEnter()
         {
-            Console.WriteLine("enter");
-            NetworkEntitiesViewModel.WriteTextBox.Text = Input;
+            if(valueChanged != null)
+            {
+                if (valueChanged.Equals("Id"))
+                {
+                    newEntity.Id = Input;
+                }
+                else if(valueChanged.Equals("Name"))
+                {
+                    newEntity.Name = Input;
+                }
+                else if (valueChanged.Equals("Filter"))
+                {
+                    FilterEntities.FilterValue = Input;
+                }
+            }
+            WriteTextBox.Text = Input;
             Input = "";
             KeyboardVisible = Visibility.Collapsed;
         }

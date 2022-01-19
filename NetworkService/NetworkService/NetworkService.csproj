@@ -70,7 +70,6 @@
     <Compile Include="ViewModel\NetworkDisplayViewModel.cs" />
     <Compile Include="ViewModel\NetworkEntitiesViewModel.cs" />
     <Compile Include="ViewModel\NetworkGraphViewModel.cs" />
-    <Compile Include="ViewModel\VirtualKeyboardViewModel.cs" />
     <Compile Include="Views\NetworkDisplayControl.xaml.cs">
       <DependentUpon>NetworkDisplayControl.xaml</DependentUpon>
     </Compile>
@@ -79,9 +78,6 @@
     </Compile>
     <Compile Include="Views\NetworkGraphControl.xaml.cs">
       <DependentUpon>NetworkGraphControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\VirtualKeyboardControl.xaml.cs">
-      <DependentUpon>VirtualKeyboardControl.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -104,10 +100,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\NetworkGraphControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\VirtualKeyboardControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

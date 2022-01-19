@@ -24,7 +24,7 @@
                     <RadioButton IsChecked="{Binding FilterEntities.GreaterThan}" Content="&gt;" Margin="10,0,10,0" VerticalContentAlignment="Center"/>
                     <RadioButton IsChecked="{Binding FilterEntities.LessThan}" Content="&lt;" VerticalContentAlignment="Center"/>
                 </StackPanel>
-                <TextBox x:Name="tbFilter" Text="{Binding FilterEntities.FilterValue}" Width="100" Height="30" Margin="10,0,0,0" VerticalContentAlignment="Center">
+                <TextBox x:Name="tbFilter" Width="100" Height="30" Margin="10,0,0,0" VerticalContentAlignment="Center">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="GotFocus">
                             <i:InvokeCommandAction Command="{Binding gotFocusFilter}" CommandParameter="{Binding ElementName=tbFilter}"/>
@@ -44,14 +44,14 @@
             </DataGrid>
             <StackPanel Orientation="Horizontal" Height="125">
                 <StackPanel Orientation="Vertical" Margin="10,0">
-                    <TextBox x:Name="tbId" Width="150" Height="30" Margin="5" Text="{Binding newEntity.Id, Mode=TwoWay}">
+                    <TextBox x:Name="tbId" Width="150" Height="30" Margin="5">
                         <i:Interaction.Triggers>
                             <i:EventTrigger EventName="GotFocus">
                                 <i:InvokeCommandAction Command="{Binding gotFocusId}" CommandParameter="{Binding ElementName=tbId}"/>
                             </i:EventTrigger>
                         </i:Interaction.Triggers>
                     </TextBox>
-                    <TextBox x:Name="tbName" Width="150" Height="30" Margin="5" Text="{Binding newEntity.Name, Mode=TwoWay}">
+                    <TextBox x:Name="tbName" Width="150" Height="30" Margin="5">
                         <i:Interaction.Triggers>
                             <i:EventTrigger EventName="GotFocus">
                                 <i:InvokeCommandAction Command="{Binding gotFocusName}" CommandParameter="{Binding ElementName=tbName}"/>
