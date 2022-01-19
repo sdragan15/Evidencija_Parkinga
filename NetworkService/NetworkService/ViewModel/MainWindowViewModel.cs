@@ -168,6 +168,8 @@ namespace NetworkService.ViewModel
                     if (e.Id.Equals(entity.Id))
                     {
                         Entities[int.Parse(entity.Id)].EntityValue = entity.EntityValue;
+
+                        //networkDisplayViewModel.UpdateCanvas();
                     }
                 }
                 

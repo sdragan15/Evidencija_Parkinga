@@ -33,7 +33,7 @@
                 </TextBox>
                 <Button Command="{Binding Filter}" Width="50" Margin="20,0,10,0" Content="Filter" Height="25"/>
             </StackPanel>
-            <DataGrid x:Name="parkingDG" ItemsSource="{Binding NetworkEntities}" SelectedItem="{Binding selectedEntity}" IsReadOnly="True" AutoGenerateColumns="False" Height="446">
+            <DataGrid x:Name="parkingDG" ItemsSource="{Binding NetworkEntities}" SelectedItem="{Binding SelectedEntity}" IsReadOnly="True" AutoGenerateColumns="False" Height="446">
                 <DataGrid.Columns>
                     <DataGridTextColumn Width="30" Header="ID" Binding="{Binding Id}"/>
                     <DataGridTextColumn Width="*" Header="Name" Binding="{Binding Name}"/>
@@ -58,7 +58,7 @@
                             </i:EventTrigger>
                         </i:Interaction.Triggers>
                     </TextBox>
-                    <ComboBox Width="150" Margin="5" ItemsSource="{Binding parkingTypes}" SelectedItem="{Binding newEntity.Type.Parking}" Height="35"/>
+                    <ComboBox Width="150" Margin="5" ItemsSource="{Binding parkingTypes}" SelectedItem="{Binding EntityParkingType}" Height="35"/>
                 </StackPanel>
                 <Image Margin="20,0,0,0" Width="100" Height="100" Source="{Binding newEntity.Type.ImageSource}" Stretch="UniformToFill"/>
             </StackPanel>

@@ -19,9 +19,10 @@ namespace NetworkService.ViewModel
         private Entity SelectedEntity { get; set; } = new Entity();
         private DisplayEntity displayEntity = new DisplayEntity();
         private bool dragging = false;
-        private List<DisplayEntity> entities = new List<DisplayEntity>();
+        public static ObservableCollection<DisplayEntity> entities = new ObservableCollection<DisplayEntity>();
         public Entity SelectedItem { get; set; }
         private Canvas tempCanvas;
+        public static ObservableCollection<Images> canvasImages { get; set; } = new ObservableCollection<Images>();
 
         public static ObservableCollection<Entity> DisplayEntities { get; private set; } = new ObservableCollection<Entity>();
 
@@ -30,24 +31,69 @@ namespace NetworkService.ViewModel
         public MyICommand<Canvas> drop { get; set; }
         public MyICommand<Canvas> mouseDown { get; set; }
         public MyICommand<Canvas> buttonClick { get; set; }
-        public MyICommand<ListView> refreshClick { get; set; }
-
+        public MyICommand refreshClick { get; set; }
 
 
         public NetworkDisplayViewModel()
         {
-            DisplayEntities.Clear();
-            foreach (Entity entity in MainWindowViewModel.Entities)
+            if(entities.Count > 0)
             {
-                NetworkDisplayViewModel.DisplayEntities.Add(entity);
+                foreach(DisplayEntity entity in entities)
+                {
+                    SetCanvasBackground(getCanvasIdFromName(entity.Id), entity.Entity.Type.ImageSource);
+                }
             }
+            else
+            {
+                SetCanvasBackgroundsToWhite();
+
+                DisplayEntities.Clear();
+                foreach (Entity entity in MainWindowViewModel.Entities)
+                {
+                    DisplayEntities.Add(entity);
+                }
+            }
+            
             ListViewSelectionChanged = new MyICommand<ListView>(OnListViewSelectionChanged);
             ListViewMouseLeftButtonUp = new MyICommand(OnListViewMouseLeftButtonUp);
             drop = new MyICommand<Canvas>(Ondrop);
             mouseDown = new MyICommand<Canvas>(OnmouseDown);
             buttonClick = new MyICommand<Canvas>(OnbuttonClick);
-            refreshClick = new MyICommand<ListView>(OnrefreshClick);
         }
+
+
+        private void SetCanvasBackgroundsToWhite()
+        {
+            BitmapImage background = new BitmapImage();
+            background.BeginInit();
+            background.UriSource = new Uri("pack://application:,,,/ViewModel/Images/white.png");
+            background.EndInit();
+
+            for (int i = 0; i < 12; i++)
+            {
+                canvasImages.Add(new Images() { Image = new ImageBrush(background), Used=false });
+            }
+        }
+
+        private void SetCanvasBackground(int id, string path)
+        {
+            BitmapImage background = new BitmapImage();
+            background.BeginInit();
+            background.UriSource = new Uri(path);
+            background.EndInit();
+
+            canvasImages[id].Image = new ImageBrush(background);
+            if (path.Equals("pack://application:,,,/ViewModel/Images/white.png"))
+            {
+                canvasImages[id].Used = false;
+            }
+            else
+            {
+                canvasImages[id].Used = true;
+            }
+            
+        }
+
 
         private void OnListViewSelectionChanged(ListView listView)
         {
@@ -56,7 +102,7 @@ namespace NetworkService.ViewModel
                 dragging = true;
                 SelectedEntity = SelectedItem;
                 Slika = SelectedEntity.Type.ImageSource;
-                Console.WriteLine(Slika);
+
                 DragDrop.DoDragDrop(listView, Slika, DragDropEffects.Copy);
             }
         }
@@ -72,17 +118,14 @@ namespace NetworkService.ViewModel
             dragging = false;
             if (SelectedEntity != null)
             {
-                if (canvas.Background == null || canvas.Background == Brushes.White)
+                if (!canvasImages[getCanvasIdFromName(canvas.Name)].Used)
                 {
-                    BitmapImage background = new BitmapImage();
-                    background.BeginInit();
                     if (SelectedEntity.EntityValue > 80)
                     {
                         Slika = "pack://application:,,,/ViewModel/Images/error.png";
                     }
-                    background.UriSource = new Uri(Slika);
-                    background.EndInit();
-                    canvas.Background = new ImageBrush(background);
+                    SetCanvasBackground(getCanvasIdFromName(canvas.Name), Slika);
+
                     DisplayEntity de = new DisplayEntity();
                     de.Entity = SelectedEntity;
                     de.Id = canvas.Name;
@@ -99,7 +142,8 @@ namespace NetworkService.ViewModel
                                 temp = displayEntity;
                             }
                         }
-                        tempCanvas.Background = Brushes.White;
+
+                        SetCanvasBackground(getCanvasIdFromName(tempCanvas.Name), "pack://application:,,,/ViewModel/Images/white.png");
                         tempCanvas = null;
                         if (temp != null)
                         {
@@ -108,6 +152,24 @@ namespace NetworkService.ViewModel
                     }
                     DisplayEntities.Remove(SelectedEntity);
                 }
+            }
+        }
+
+       
+
+        private int getCanvasIdFromName(string name)
+        {
+            try
+            {
+                int id;
+                string value = name.Substring(10);
+                id = int.Parse(value);
+                return --id;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return -1;
             }
         }
 
@@ -146,7 +208,7 @@ namespace NetworkService.ViewModel
                         {
                             if (entity2.Id.Equals(entity.Entity.Id))
                             {
-                                findCanvas.Background = Brushes.White;
+                                SetCanvasBackground(getCanvasIdFromName(findCanvas.Name), "pack://application:,,,/ViewModel/Images/white.png");
                                 NetworkDisplayViewModel.DisplayEntities.Add(entity2);
                                 done = true;
                                 entity1 = entity;
@@ -162,10 +224,26 @@ namespace NetworkService.ViewModel
             }
         }
 
-        private void OnrefreshClick(ListView list)
+        public void UpdateCanvas()
         {
-            list.Items.Refresh();
+            Console.WriteLine("Update!!!");
+            foreach (DisplayEntity entity in entities)
+            {
+                if (entity.Entity.EntityValue > 80)
+                {
+                    SetCanvasBackground(getCanvasIdFromName(entity.Id), "pack://application:,,,/ViewModel/Images/error.png");                    
+                    Console.WriteLine("Ovde 111 " + entity.Id);
+                }
+                else
+                {
+                    SetCanvasBackground(getCanvasIdFromName(entity.Id), entity.Entity.Type.ImageSource);
+                    Console.WriteLine("Ovde 222 " + entity.Id);
+                }
+                Console.WriteLine("ovde 333");
+            }
+            Console.WriteLine("Kraj!");
         }
+
 
     }
 }

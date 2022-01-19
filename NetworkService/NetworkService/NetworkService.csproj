@@ -64,6 +64,7 @@
     <Compile Include="Model\DisplayEntity.cs" />
     <Compile Include="Model\Entity.cs" />
     <Compile Include="Model\Filter.cs" />
+    <Compile Include="Model\Images.cs" />
     <Compile Include="Model\ParkingType.cs" />
     <Compile Include="MyICommand.cs" />
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
@@ -137,6 +138,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="ViewModel\Images\error.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="ViewModel\Images\white.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

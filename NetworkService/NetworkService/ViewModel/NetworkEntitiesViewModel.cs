@@ -26,7 +26,36 @@ namespace NetworkService.ViewModel
         public ObservableCollection<ParkingType> parkingTypes { get; private set; } = new ObservableCollection<ParkingType>();
 
         public Entity newEntity { get; set; } = new Entity();
-        public Entity selectedEntity { get; set; } = new Entity();
+
+        private Entity selectedEntity;
+        public Entity SelectedEntity
+        {
+            get { return selectedEntity; }
+            set
+            {
+                selectedEntity = value;
+                Delete.RaiseCanExecuteChanged();
+                OnPropertyChanged("SelectedEntity");
+            }
+        }
+
+        private string entityParkingType;
+
+        public string EntityParkingType
+        {
+            get { return entityParkingType; }
+            set
+            {
+                if(entityParkingType != value)
+                {
+                    entityParkingType = value;
+                    newEntity.Type.Parking = entityParkingType;
+                    OnPropertyChanged("EntityParkingType");
+                    Add.RaiseCanExecuteChanged();
+                }
+            }
+        }
+
         public Filter FilterEntities { get; set; } = new Filter();
         public static TextBox WriteTextBox { get; set; } = new TextBox();
 
@@ -56,9 +85,9 @@ namespace NetworkService.ViewModel
             parkingTypes.Add(new ParkingType() { ImageSource = "Images/parkingEmpty.jpg", Parking = "Otvoren" });
             parkingTypes.Add(new ParkingType() { ImageSource = "Images/parkingFull.jpg", Parking = "Zatvoren" });
             Refresh = new MyICommand(OnRefresh);
-            Add = new MyICommand(OnAdd);
+            Add = new MyICommand(OnAdd, CanAdd);
             Delete = new MyICommand(OnDelete);
-            Filter = new MyICommand(OnFilter);
+            Filter = new MyICommand(OnFilter, CanFilter);
             gotFocusId = new MyICommand<TextBox>(OngotFocusId);
             gotFocusName = new MyICommand<TextBox>(OngotFocusName);
             gotFocusFilter = new MyICommand<TextBox>(OngotFocusFilter);
@@ -130,8 +159,15 @@ namespace NetworkService.ViewModel
 
         private void OnDelete()
         {
-            BackUpEntities.Remove(selectedEntity);
+            BackUpEntities.Remove(SelectedEntity);
             OnRefresh();
+        }
+
+        private bool CanDelete()
+        {
+            if (SelectedEntity != null)
+                return true;
+            return false;  
         }
 
         private void OnFilter()
@@ -155,6 +191,34 @@ namespace NetworkService.ViewModel
             }
         }
 
+        private bool CanFilter()
+        {
+            try
+            {
+                int.Parse(FilterEntities.FilterValue);
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        private bool CanAdd()
+        {
+            try
+            {
+                int.Parse(newEntity.Id);
+                if(newEntity.Name != null && newEntity.Name.Trim().Length > 0 && newEntity.Type.Parking != null)
+                    return true;
+
+                return false;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
 
         private void ParkingFilter()
         {
@@ -327,14 +391,17 @@ namespace NetworkService.ViewModel
                 if (valueChanged.Equals("Id"))
                 {
                     newEntity.Id = Input;
+                    Add.RaiseCanExecuteChanged();
                 }
                 else if(valueChanged.Equals("Name"))
                 {
                     newEntity.Name = Input;
+                    Add.RaiseCanExecuteChanged();
                 }
                 else if (valueChanged.Equals("Filter"))
                 {
                     FilterEntities.FilterValue = Input;
+                    Filter.RaiseCanExecuteChanged();
                 }
             }
             WriteTextBox.Text = Input;
