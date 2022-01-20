@@ -19,6 +19,7 @@ namespace NetworkService.ViewModel
         private int value1;
         private int value2;
         private int value3;
+        private int value4;
 
         public int Value0
         {
@@ -72,6 +73,19 @@ namespace NetworkService.ViewModel
             }
         }
 
+        public int Value4
+        {
+            get { return value4; }
+            set
+            {
+                if (value != value4)
+                {
+                    value4 = value;
+                    OnPropertyChanged("Value4");
+                }
+            }
+        }
+
         private string selectedValue;
         public string SelectedValue
         {
@@ -101,6 +115,7 @@ namespace NetworkService.ViewModel
             value1 = 550;
             value2 = 550;
             value3 = 550;
+            value4 = 330;
             ShowFilter = new MyICommand(OnShowFilter);
 
             ReadNewEntities(MainWindowViewModel.Path);
@@ -153,6 +168,7 @@ namespace NetworkService.ViewModel
                             Value1 = (int)Entities[1].EntityValue;
                             Value2 = (int)Entities[2].EntityValue;
                             Value3 = (int)Entities[3].EntityValue;
+                            Value4 = (int)Entities[4].EntityValue;
                         }
                         
                     }catch (Exception ex)
