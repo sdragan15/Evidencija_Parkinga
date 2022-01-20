@@ -115,7 +115,7 @@ namespace NetworkService.ViewModel
             value1 = 550;
             value2 = 550;
             value3 = 550;
-            value4 = 330;
+            value4 = 550;
             ShowFilter = new MyICommand(OnShowFilter);
 
             ReadNewEntities(MainWindowViewModel.Path);

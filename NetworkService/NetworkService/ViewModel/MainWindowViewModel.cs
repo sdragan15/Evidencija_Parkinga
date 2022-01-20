@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 
 namespace NetworkService.ViewModel
 {
+    public enum Actions { NO_ACTION, ADD, DELETE, WINDOW_CHANGED};
     public class MainWindowViewModel:BindableBase
     {
 
@@ -23,6 +24,9 @@ namespace NetworkService.ViewModel
         public MyICommand SetMenuEntities { get; set; }
         public MyICommand SetMenuDisplay { get; set; }
         public MyICommand SetMenuGraph { get; set; }
+        public MyICommand UndoAction { get; set; }
+        public static Object LastAction { get; set; }
+        public static Actions LastActionId { get; set; }
 
         public static string Path = AppDomain.CurrentDomain.BaseDirectory + "entities.txt";
 
@@ -74,6 +78,7 @@ namespace NetworkService.ViewModel
             SetMenuEntities = new MyICommand(OnSetMenuEntities);
             SetMenuDisplay = new MyICommand(OnSetMenuDisplay);
             SetMenuGraph = new MyICommand(OnSetMenuGraph);
+            UndoAction = new MyICommand(OnUndoAction);
 
             createListener(); //Povezivanje sa serverskom aplikacijom
         }
@@ -180,20 +185,50 @@ namespace NetworkService.ViewModel
             }
         }
 
+        private void OnUndoAction()
+        {
+            if(LastAction != null && LastActionId != Actions.NO_ACTION)
+            {
+                if (LastActionId == Actions.ADD)
+                {
+                    networkEntitiesViewModel.UndoAdd((Entity)LastAction);
+                }
+                if(LastActionId == Actions.DELETE)
+                {
+                    networkEntitiesViewModel.UndoDelete((Entity)LastAction);
+                }
+                if(LastActionId == Actions.WINDOW_CHANGED)
+                {
+                    CurrentViewModel = (BindableBase)LastAction;
+                }
+                
+            }
+            
+
+            LastAction = null;
+            LastActionId = Actions.NO_ACTION;
+        }
+
 
         private void OnSetMenuEntities()
         {
-            
+            LastAction = CurrentViewModel;
+            LastActionId = Actions.WINDOW_CHANGED;
             CurrentViewModel = networkEntitiesViewModel;
         }
 
         private void OnSetMenuDisplay()
         {
+            LastAction = CurrentViewModel;
+            LastActionId = Actions.WINDOW_CHANGED;
             CurrentViewModel = networkDisplayViewModel;
         }
 
         private void OnSetMenuGraph()
         {
+            LastAction = CurrentViewModel;
+            LastActionId = Actions.WINDOW_CHANGED;
+
             CurrentViewModel = networkGraphViewModel;
         }
 

@@ -151,15 +151,43 @@ namespace NetworkService.ViewModel
             }
             Entity entity2 = CreateNewEntity(newEntity);
 
+            MainWindowViewModel.LastAction = entity2;
+            MainWindowViewModel.LastActionId = Actions.ADD;
             NetworkEntities.Add(entity2);
             BackUpEntities.Add(entity2);
             MainWindowViewModel.Entities.Add(entity2);
             NetworkDisplayViewModel.DisplayEntities.Add(entity2);
         }
 
+        public void UndoAdd(Entity entity)
+        {
+            BackUpEntities.Remove(entity);
+            MainWindowViewModel.Entities.Remove(entity);
+            NetworkEntities.Remove(entity);
+            NetworkDisplayViewModel.DisplayEntities.Remove(entity);
+
+            OnRefresh();
+            
+        }
+
         private void OnDelete()
         {
+            MainWindowViewModel.LastAction = selectedEntity;
+            MainWindowViewModel.LastActionId = Actions.DELETE;
             BackUpEntities.Remove(SelectedEntity);
+            MainWindowViewModel.Entities.Remove(selectedEntity);
+            NetworkEntities.Remove(SelectedEntity);
+            NetworkDisplayViewModel.DisplayEntities.Remove(selectedEntity);
+            OnRefresh();
+        }
+
+        public void UndoDelete(Entity entity)
+        {
+            NetworkEntities.Add(entity);
+            BackUpEntities.Add(entity);
+            MainWindowViewModel.Entities.Add(entity);
+            NetworkDisplayViewModel.DisplayEntities.Add(entity);
+
             OnRefresh();
         }
 
